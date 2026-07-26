@@ -332,6 +332,17 @@
     text-transform: uppercase;
     color: var(--muted);
   }
+  .ig-icon{
+    display: inline-flex;
+    vertical-align: middle;
+    margin-left: 10px;
+    color: var(--muted);
+    opacity: 0.85;
+    transition: opacity .2s ease;
+    position: relative;
+    top: -1px;
+  }
+  .ig-icon:hover{ opacity: 1; }
 
   /* ---------- scroll reveal ---------- */
   .reveal{
@@ -587,7 +598,16 @@
   </form>
 </section>
 
-<footer>© 2026 Rossella Mazzocco</footer>
+<footer>
+  © 2026 Rossella Mazzocco
+  <a class="ig-icon" href="https://www.instagram.com/mazzoccart" target="_blank" rel="noopener" aria-label="Instagram">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+      <circle cx="12" cy="12" r="4.2"></circle>
+      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"></circle>
+    </svg>
+  </a>
+</footer>
 
 <!-- ---------- lightbox ---------- -->
 <div class="lightbox" id="lightbox">
@@ -658,6 +678,12 @@
     if (e.key === 'ArrowRight') navLightbox(1);
     if (e.key === 'ArrowLeft') navLightbox(-1);
   });
+
+  // always open at the top, even if the URL carries a leftover #hash
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  window.addEventListener('load', () => window.scrollTo(0, 0));
 
   // contact form submission (Formspree)
   const contactForm = document.getElementById('contact-form');
